@@ -32,7 +32,7 @@ R_xx = sliding_window_view(r_xx[:, 0], k+1)
 w_hat = np.linalg.solve(R_xx, r_sx[k:])
 R_xx.shape
 
-padded_x_n = np.pad(x_n[:, 0], k, mode='constant', constant_values=(0,0))
+padded_x_n = np.pad(x_n[:, 0], (k,0), mode='constant', constant_values=(0,0))
 X = sliding_window_view(padded_x_n, k+1)
 
 X.shape
