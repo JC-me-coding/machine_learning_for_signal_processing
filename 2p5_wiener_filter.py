@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import utils
 
-root = r'C:/msys64/git_openai/git/machine_learning_for_signal_processing/data/'
+root = r'data/'
 
 # load the signal
 signal_file = root + 'problem2_5_signal.mat'
@@ -21,11 +21,11 @@ w_n = noise_mat['noise']
 x_n = s_n + w_n
 
 plt.plot(x_n) 
+plt.show()
+r_xx = utils.xcorr(x_n, x_n, 2)
+r_sx = utils.xcorr(s_n, x_n, 2)
 
-r_xx = utils.xcorr(x_n, x_n, 3)
-r_dx = utils.xcorr(x_n, x_n, 3) 
-
-R_xx = np.vstack((r_xx[2:5], r_xx[1:4], r_xx[0:3]))
+R_xx = np.hstack((r_xx[2:5], r_xx[1:4], r_xx[0:3]))
 
 # the line below does not run
 #w_hat = np.linalg.solve(R_xx, r_dx[2:5])
