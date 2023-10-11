@@ -26,19 +26,20 @@ plt.plot(x_n)
 plt.show()
 
 k = 5
-r_xx = utils.xcorr(x_n, x_n, k)
-r_sx = utils.xcorr(s_n, x_n, k)
-R_xx = sliding_window_view(r_xx[:, 0], k+1)
-w_hat = np.linalg.solve(R_xx, r_sx[k:])
-R_xx.shape
+def get_my_error(k):
+    r_xx = utils.xcorr(x_n, x_n, k)
+    r_sx = utils.xcorr(s_n, x_n, k)
+    R_xx = sliding_window_view(r_xx[:, 0], k+1)
+    w_hat = np.linalg.solve(R_xx, r_sx[k:])
 
-padded_x_n = np.pad(x_n[:, 0], (k,0), mode='constant', constant_values=(0,0))
-X = sliding_window_view(padded_x_n, k+1)
+    padded_x_n = np.pad(x_n[:, 0], (k,0), mode='constant', constant_values=(0,0))
+    X = sliding_window_view(padded_x_n, k+1)
+    s_hat = X@w_hat
+    err = np.mean((s_hat - s_n)**2)
+    return err
 
-X.shape
-w_hat.shape
-s_hat = X@w_hat
+err_list = []
+for i in range(100):
+    err_list.append(get_my_error(i))
 
-err = np.mean((s_hat - s_n)**2)
-
-
+err_list
