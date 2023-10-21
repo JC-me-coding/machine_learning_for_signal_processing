@@ -4,7 +4,7 @@ import utils
 from numpy.lib.stride_tricks import sliding_window_view
 
 root = r'data/'
-
+output_root = 'outputs/'
 # load the signal
 signal_file = root + 'problem2_5_signal.mat'
 signal_mat = utils.loadmatlabfile(signal_file)
@@ -21,11 +21,9 @@ w_n = noise_mat['noise']
 # proudly stolen from ex3.2.8.py
 x_n = s_n + w_n
 
-
 plt.plot(x_n)
 plt.show()
 
-k = 5
 def get_my_error(k):
     #print(f"\n\n{k = }")
     r_xx = utils.xcorr(x_n, x_n, k-1)
@@ -45,7 +43,15 @@ def get_my_error(k):
     return err
 
 err_list = []
-for i in range(1,5):
+ks = range(1, 100)
+for i in ks:
     err_list.append(get_my_error(i))
 
-err_list
+plt.plot(ks, err_list)
+#plt.show()
+plt.savefig(output_root + 'Problem_2_5_MSE.png')
+
+plt.plot(np.log(err_array))
+plt.show()
+plt.savefig(output_root + 'log_MSE.png')
+
