@@ -27,19 +27,25 @@ plt.show()
 
 k = 5
 def get_my_error(k):
-    r_xx = utils.xcorr(x_n, x_n, k)
-    r_sx = utils.xcorr(s_n, x_n, k)
-    R_xx = sliding_window_view(r_xx[:, 0], k+1)
-    w_hat = np.linalg.solve(R_xx, r_sx[k:])
-
-    padded_x_n = np.pad(x_n[:, 0], (k,0), mode='constant', constant_values=(0,0))
-    X = sliding_window_view(padded_x_n, k+1)
+    #print(f"\n\n{k = }")
+    r_xx = utils.xcorr(x_n, x_n, k-1)
+    #print(f"{r_xx.shape = }")
+    r_sx = utils.xcorr(s_n, x_n, k-1)
+    #print(f"{r_sx.shape = }")
+    R_xx = sliding_window_view(r_xx[:, 0], k)
+    #print(f"{R_xx.shape = }")
+    w_hat = np.linalg.solve(R_xx, r_sx[k-1:])
+    #print(f"{w_hat.shape = }")
+    padded_x_n = np.pad(x_n[:, 0], (k-1,0), mode='constant', constant_values=(0,0))
+    #print(f"{padded_x_n.shape = }")
+    X = sliding_window_view(padded_x_n, k)
+    #print(f"{X.shape = }")
     s_hat = X@w_hat
     err = np.mean((s_hat - s_n)**2)
     return err
 
 err_list = []
-for i in range(100):
+for i in range(1,5):
     err_list.append(get_my_error(i))
 
 err_list
