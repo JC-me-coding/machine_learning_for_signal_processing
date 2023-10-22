@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Oct 11 17:11:55 2023
-
-@author: JUCA
-"""
-
 import librosa
 import librosa.display
 import IPython
