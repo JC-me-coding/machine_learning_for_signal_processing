@@ -64,14 +64,3 @@ for i, combination in enumerate(combinations):
     hop_length = combination[2]
     print(f"creating plot number {i+1} with , {hop_length = }, {nfft = }, {windowfct = }")
     plot_tf_analysis(y, nfft=nfft, hop_length=hop_length, window_fct=windowfct, tofile=True, folder=output_folder)
-
-
-
-'''
-# noise
-spec_x = librosa.stft(x, n_fft=512, hop_length=32, center=True)
-x_db = librosa.amplitude_to_db(abs(spec_x))
-plt.figure(figsize=(14, 3))
-plt.title("HIGHWAY NOISE")
-librosa.display.specshow(x_db, sr=Fs)
-'''
