@@ -52,8 +52,8 @@ w = np.zeros((L, nsamp))
 e_lms = np.zeros(nsamp)
 w_n = np.zeros(L)
 d_hat = np.zeros(nsamp)
-mu = 0.4  # step size
 
+mu = 0.4  # step size
 for it in range(nsamp):
     x_n = np.flip(X[it,:])
     d = signal_with_noise[it]
@@ -169,19 +169,15 @@ def get_my_RLS_error(beta, lambda_):
     filtered_output_MSE_RLS = np.mean(filtered_output_RLS ** 2)
     return filtered_output_MSE_RLS
 
-
-lambda_ = 1e-2
-beta = 0.99
-
 myerrors=[]
+step = 0
 for lambda_ in [1e-5, 1e-4, 1e-3, 1e-2, 1e-1, 1e1, 1e2, 1e3, 1e4]:
     for beta in [0.90, 0.95, 0.99, 0.999]:
+        step +=1
         my_error = get_my_RLS_error(beta, lambda_)
         myerrors.append(my_error)
-        print(f"Parameters {lambda_ =:.0e}, {beta = :2.5f}: error: {my_error:2.6f}")
+        print(f"Step: {step}, Parameters {lambda_ =:.0e}, {beta = :2.5f}: error: {my_error:2.6f}")
 
 myerrors_array = np.asarray(myerrors)
-
-
-np.argmin(myerrors_array)
-
+print(np.argmin(myerrors_array))
+print(np.min(myerrors_array))
