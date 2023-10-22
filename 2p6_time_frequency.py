@@ -9,6 +9,7 @@ import librosa
 import librosa.display
 import IPython
 import matplotlib.pyplot as plt
+import matplotlib
 import sounddevice as sd # only needed for playing
 import soundfile as sf # only needed if playing does not work
 import numpy as np
@@ -34,7 +35,7 @@ def plot_tf_analysis(y, nfft, hop_length, window_fct='hann', tofile=False, folde
         plt.savefig(filename)
     plt.close()
 
-tofile = True
+tofile = False
 plot_tf_analysis(y, nfft=32, hop_length=128, window_fct='hann', tofile=tofile, folder=output_folder)
 plot_tf_analysis(y, nfft=32, hop_length=32, window_fct='hann', tofile=tofile, folder=output_folder)
 plot_tf_analysis(y, nfft=1014, hop_length=128, window_fct='hann', tofile=tofile, folder=output_folder)
@@ -44,19 +45,6 @@ plot_tf_analysis(y, nfft=128, hop_length=1, window_fct='hann', tofile=tofile, fo
 plot_tf_analysis(y, nfft=256, hop_length=1, window_fct='hann', tofile=tofile, folder=output_folder) #BEST
 plot_tf_analysis(y, nfft=256, hop_length=1, window_fct='triang', tofile=tofile, folder=output_folder)
 plot_tf_analysis(y, nfft=256, hop_length=1, window_fct='boxcar', tofile=tofile, folder=output_folder)
-
-spec_y = librosa.stft(y, n_fft=nfft, hop_length=hop_length, center=True, window=window_fct)
-y_db = librosa.amplitude_to_db(abs(spec_y))
-plt.figure(figsize=(14, 3))
-plt.title(f"Synthesizer, {hop_length = }, {nfft = }, {window_fct = }")
-librosa.display.specshow(y_db, sr=Fs)
-
-plt.show()
-#filename = f"{folder}2p6_time_frequency_nfft{nfft}_hoplength{hop_length}_windowfct_{window_fct}.png"
-#plt.savefig(filename)
-plt.close()
-
-
 
 
 # Loop through all combinations:
