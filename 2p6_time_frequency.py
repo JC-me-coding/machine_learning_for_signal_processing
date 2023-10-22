@@ -36,19 +36,23 @@ def plot_tf_analysis(y, nfft, hop_length, window_fct='hann', tofile=False, folde
     plt.close()
 
 tofile = False
-plot_tf_analysis(y, nfft=32, hop_length=128, window_fct='hann', tofile=tofile, folder=output_folder)
-plot_tf_analysis(y, nfft=32, hop_length=32, window_fct='hann', tofile=tofile, folder=output_folder)
-plot_tf_analysis(y, nfft=1014, hop_length=128, window_fct='hann', tofile=tofile, folder=output_folder)
-plot_tf_analysis(y, nfft=512, hop_length=1, window_fct='hann', tofile=tofile, folder=output_folder)
-plot_tf_analysis(y, nfft=512, hop_length=512, window_fct='hann', tofile=tofile, folder=output_folder)
+#plot_tf_analysis(y, nfft=32, hop_length=128, window_fct='hann', tofile=tofile, folder=output_folder)
+#plot_tf_analysis(y, nfft=32, hop_length=32, window_fct='hann', tofile=tofile, folder=output_folder)
+plot_tf_analysis(y, nfft=64, hop_length=1, window_fct='hann', tofile=tofile, folder=output_folder)
 plot_tf_analysis(y, nfft=128, hop_length=1, window_fct='hann', tofile=tofile, folder=output_folder)
 plot_tf_analysis(y, nfft=256, hop_length=1, window_fct='hann', tofile=tofile, folder=output_folder) #BEST
+plot_tf_analysis(y, nfft=512, hop_length=1, window_fct='hann', tofile=tofile, folder=output_folder)
+plot_tf_analysis(y, nfft=1024, hop_length=1, window_fct='hann', tofile=tofile, folder=output_folder)
+
+#plot_tf_analysis(y, nfft=512, hop_length=512, window_fct='hann', tofile=tofile, folder=output_folder)
 plot_tf_analysis(y, nfft=256, hop_length=1, window_fct='triang', tofile=tofile, folder=output_folder)
 plot_tf_analysis(y, nfft=256, hop_length=1, window_fct='boxcar', tofile=tofile, folder=output_folder)
+plot_tf_analysis(y, nfft=256, hop_length=256, window_fct='hann', tofile=tofile, folder=output_folder)
+plot_tf_analysis(y, nfft=256, hop_length=1, window_fct='blackmanharris', tofile=tofile, folder=output_folder) #BEST
 
 
 # Loop through all combinations:
-windowfcts = ['hann', 'boxcar', 'triang']
+windowfcts = ['hann', 'hamming']
 nffts = 2**np.asarray(range(5,11))
 hop_lengths = 2**np.asarray(range(5,11))
 
