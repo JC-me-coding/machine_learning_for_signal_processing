@@ -51,7 +51,4 @@ plt.plot(ks, err_list)
 #plt.show()
 plt.savefig(output_root + 'Problem_2_5_MSE.png')
 
-plt.plot(np.log(err_array))
-plt.show()
-plt.savefig(output_root + 'log_MSE.png')
 
